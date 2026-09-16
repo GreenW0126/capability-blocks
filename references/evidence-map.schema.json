@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.skill/capability-blocks/evidence-map.schema.json",
+  "title": "Capability Blocks Evidence Map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "generated_at",
+    "updated_at",
+    "retention",
+    "blocks_artifact",
+    "experiences",
+    "evidence_units",
+    "jd_sources",
+    "demand_clusters",
+    "capability_mappings"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "retention": { "const": "runtime_only" },
+    "blocks_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "version"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "experiences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "experience_id",
+          "source_refs",
+          "organization_or_project",
+          "role_or_relationship",
+          "date_range",
+          "metadata_status"
+        ],
+        "properties": {
+          "experience_id": { "type": "string", "pattern": "^EXP-[A-Za-z0-9_-]+$" },
+          "label": { "type": "string" },
+          "source_refs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "organization_or_project": { "type": ["string", "null"], "minLength": 1 },
+          "role_or_relationship": { "type": ["string", "null"], "minLength": 1 },
+          "date_range": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "required": ["start", "end", "precision"],
+            "properties": {
+              "start": { "type": ["string", "null"], "minLength": 1 },
+              "end": { "type": ["string", "null"], "minLength": 1 },
+              "precision": {
+                "enum": ["exact_month", "exact_year", "approximate", "unknown", "user_withheld"]
+              }
+            }
+          },
+          "metadata_status": {
+            "enum": ["complete", "partial", "user_withheld", "not_applicable"]
+          },
+          "timeline_ref": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "evidence_units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "experience_id",
+          "source_type",
+          "source_ref",
+          "raw_statement",
+          "normalized_fact",
+          "information_type",
+          "ownership"
+        ],
+        "properties": {
+          "evidence_id": { "type": "string", "pattern": "^E-[A-Za-z0-9_-]+$" },
+          "experience_id": { "type": "string" },
+          "source_type": {
+            "enum": ["user_correction", "user_confirmation", "user_statement", "user_file", "old_cv"]
+          },
+          "source_ref": { "type": "string", "minLength": 1 },
+          "raw_statement": { "type": "string", "minLength": 1 },
+          "normalized_fact": { "type": "string", "minLength": 1 },
+          "information_type": { "enum": ["fact", "interpretation", "hypothesis"] },
+          "problem": { "type": ["string", "null"] },
+          "judgment": { "type": ["string", "null"] },
+          "action": { "type": ["string", "null"] },
+          "method": { "type": ["string", "null"] },
+          "output": { "type": ["string", "null"] },
+          "impact": { "type": ["string", "null"] },
+          "scope": { "type": ["object", "null"], "additionalProperties": true },
+          "ownership": {
+            "enum": ["led", "owned", "co_led", "collaborated", "contributed", "observed", "unspecified"]
+          }
+        }
+      }
+    },
+    "jd_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["jd_source_id", "role_title", "source_ref", "accessed_at"],
+        "properties": {
+          "jd_source_id": { "type": "string", "pattern": "^JD-[A-Za-z0-9_-]+$" },
+          "role_title": { "type": "string", "minLength": 1 },
+          "company": { "type": ["string", "null"] },
+          "region": { "type": ["string", "null"] },
+          "source_ref": { "type": "string", "minLength": 1 },
+          "accessed_at": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "demand_clusters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["demand_cluster_id", "label", "jd_source_refs"],
+        "properties": {
+          "demand_cluster_id": { "type": "string", "pattern": "^D-[A-Za-z0-9_-]+$" },
+          "label": { "type": "string", "minLength": 1 },
+          "role_families": { "type": "array", "items": { "type": "string" } },
+          "jd_source_refs": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+        }
+      }
+    },
+    "capability_mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "block_id",
+          "display_label",
+          "title",
+          "evidence_links",
+          "demand_cluster_refs",
+          "safe_claims",
+          "claim_boundaries"
+        ],
+        "properties": {
+          "block_id": { "type": "string", "pattern": "^CB-[A-Za-z0-9_-]+$" },
+          "display_label": { "type": "string", "pattern": "^[A-D]$" },
+          "title": { "type": "string", "minLength": 1 },
+          "evidence_links": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["evidence_id", "supports", "mapping_reason"],
+              "properties": {
+                "evidence_id": { "type": "string" },
+                "supports": {
+                  "type": "array",
+                  "items": { "enum": ["problem", "judgment", "action", "method", "output", "impact", "transfer"] },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "mapping_reason": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "demand_cluster_refs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "safe_claims": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "claim_boundaries": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

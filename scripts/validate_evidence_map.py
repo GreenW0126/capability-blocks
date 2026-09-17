@@ -66,10 +66,10 @@ def validate(data: dict, handoff: bool = False) -> None:
     missing = sorted(required - data.keys())
     if missing:
         fail(f"missing top-level fields: {', '.join(missing)}")
-    if data["schema_version"] != "1.1":
-        fail("schema_version must be 1.1")
-    if data["retention"] != "runtime_only":
-        fail("retention must be runtime_only")
+    if data["schema_version"] != "1.2":
+        fail("schema_version must be 1.2")
+    if data["retention"] != "user_managed":
+        fail("retention must be user_managed")
     blocks_artifact = data["blocks_artifact"]
     if not isinstance(blocks_artifact, dict):
         fail("blocks_artifact must be an object")

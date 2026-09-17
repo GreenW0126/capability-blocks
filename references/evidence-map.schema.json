@@ -18,11 +18,11 @@
     "capability_mappings"
   ],
   "properties": {
-    "schema_version": { "const": "1.1" },
+    "schema_version": { "const": "1.2" },
     "run_id": { "type": "string", "minLength": 1 },
     "generated_at": { "type": "string", "format": "date-time" },
     "updated_at": { "type": "string", "format": "date-time" },
-    "retention": { "const": "runtime_only" },
+    "retention": { "const": "user_managed" },
     "blocks_artifact": {
       "type": "object",
       "additionalProperties": false,

@@ -82,4 +82,4 @@ python scripts/validate_evidence_map.py --handoff .capability-blocks-session/evi
 - JSON 不重复保存旧 CV 可承载的联系信息；
 - 每段被积木引用的经历均有 `organization_or_project`、`role_or_relationship` 和完整 `date_range`，且 `metadata_status=complete`；
 - 用户的最新修正已同步进入两份产物；
-- 产物运行时间、保留策略和删除范围已记录。
+- 产物运行时间、用户管理型保留策略和保存位置已记录。

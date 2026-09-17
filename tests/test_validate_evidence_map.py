@@ -13,11 +13,11 @@ SPEC.loader.exec_module(MODULE)
 
 def valid_map():
     return {
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "run_id": "synthetic-test",
         "generated_at": "2026-09-13T00:00:00Z",
         "updated_at": "2026-09-13T00:00:00Z",
-        "retention": "runtime_only",
+        "retention": "user_managed",
         "blocks_artifact": {"path": "capability-blocks.md", "version": "test"},
         "experiences": [
             {

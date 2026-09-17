@@ -11,6 +11,7 @@
     "updated_at",
     "retention",
     "blocks_artifact",
+    "consumer_contract",
     "experiences",
     "evidence_units",
     "jd_sources",
@@ -18,7 +19,7 @@
     "capability_mappings"
   ],
   "properties": {
-    "schema_version": { "const": "1.2" },
+    "schema_version": { "const": "1.3" },
     "run_id": { "type": "string", "minLength": 1 },
     "generated_at": { "type": "string", "format": "date-time" },
     "updated_at": { "type": "string", "format": "date-time" },
@@ -30,6 +31,63 @@
       "properties": {
         "path": { "type": "string", "minLength": 1 },
         "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "consumer_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "read_order",
+        "artifact_roles",
+        "required_external_inputs",
+        "strict_metadata_validation_required",
+        "limitations",
+        "downstream_rules"
+      ],
+      "properties": {
+        "contract_version": { "const": "1.0" },
+        "read_order": {
+          "const": ["capability_blocks", "evidence_map"]
+        },
+        "artifact_roles": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["capability_blocks", "evidence_map"],
+          "properties": {
+            "capability_blocks": { "const": "content_strategy_and_priority" },
+            "evidence_map": { "const": "factual_source_and_claim_boundaries" }
+          }
+        },
+        "required_external_inputs": {
+          "const": ["candidate_profile_or_confirmed_timeline", "target_jd"]
+        },
+        "strict_metadata_validation_required": { "const": true },
+        "limitations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["complete_cv_input", "reason", "excluded_personal_data"],
+          "properties": {
+            "complete_cv_input": { "const": false },
+            "reason": { "const": "requires_external_profile_timeline_and_target_jd" },
+            "excluded_personal_data": { "const": ["name", "contact_details"] }
+          }
+        },
+        "downstream_rules": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 6,
+          "items": {
+            "enum": [
+              "use_blocks_for_strategy",
+              "use_evidence_map_for_facts",
+              "trace_material_claims_to_block_and_evidence_ids",
+              "do_not_copy_blocks_as_cv_bullets",
+              "do_not_invent_or_inflate",
+              "do_not_merge_distinct_experiences"
+            ]
+          }
+        }
       }
     },
     "experiences": {

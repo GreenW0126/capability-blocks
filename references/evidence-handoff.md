@@ -27,6 +27,18 @@
 - 岗位需求簇与 JD 来源引用；
 - 可安全展开的主张及不得越过的边界。
 
+### `consumer_contract`
+
+`evidence-map.json` 必须包含机器可读的 `consumer_contract`。它固定声明：
+
+- 先用 `capability-blocks.md` 决定内容战略和优先级，再用 `evidence-map.json` 核验事实与表达边界；
+- 下游生成完整 CV 前必须另行取得用户确认的个人资料或完整时间线，以及当次目标 JD；两份核心产物本身不是完整 CV 输入；
+- 向下游交付前必须通过严格履历元数据校验；
+- 下游不得把积木直接复制成 CV bullet，不得虚构或放大事实、所有权和影响，不得把不同经历合并成虚构项目；
+- 实质主张必须能回指 block ID 与 evidence ID。
+
+这些约束使用 schema 中定义的稳定字段和值，不写入特定 Skill、Agent 平台或 CV 工具名称。
+
 ## 记录规则
 
 - 原始语料按“能独立支持一个事实或判断”切分；不存无关闲聊、系统提示或 Agent 措辞。
@@ -65,6 +77,8 @@ JD 不属于候选人事实来源。当高优先级来源覆盖旧值时，更�
 - 不用 JD 补齐用户没有的技能、所有权或结果；
 - 发现材料冲突时按上述优先级处理；仍无法判断时使用范围更安全的表达，或只询问会改变 CV 实质内容的一个问题。
 
+`capability-blocks.md` 末尾同时保留一段简短的“下游工具读取说明”，以便不能稳定解析 JSON schema 的工具仍能理解读取顺序、必需外部输入和事实边界。该说明不替代 `consumer_contract`。
+
 正式交接前运行：
 
 ```bash
@@ -80,6 +94,7 @@ python scripts/validate_evidence_map.py --handoff .capability-blocks-session/evi
 - 所有 evidence ID、JD source ID 和 demand-cluster ID 唯一且引用可解析；
 - 积木映射不引用 `hypothesis` 作为直接 CV 证据；
 - JSON 不重复保存旧 CV 可承载的联系信息；
+- `consumer_contract` 的读取顺序、产物职责、外部输入、限制和下游规则完整且符合 schema；
 - 每段被积木引用的经历均有 `organization_or_project`、`role_or_relationship` 和完整 `date_range`，且 `metadata_status=complete`；
 - 用户的最新修正已同步进入两份产物；
 - 产物运行时间、用户管理型保留策略和保存位置已记录。

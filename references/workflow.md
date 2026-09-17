@@ -100,6 +100,7 @@
 - JSON 中每个映射写明对应 evidence ID、它支持的问题/判断/行动/产出/影响环节，以及从证据到能力主张的简短推导。
 - 积木中的岗位语言对应 demand-cluster ID 和 JD source ID；JD 不得成为用户经历的 evidence ID。
 - 保存可安全展开的主张和责任/数据/因果边界，供下游 Agent 使用，不向用户显示内部状态。
+- 在 JSON 中写入符合 schema 的 `consumer_contract`；在 `capability-blocks.md` 末尾写入简短的“下游工具读取说明”。两处必须一致声明读取顺序、严格元数据校验、生成完整 CV 所需的外部资料和事实边界，不绑定特定下游 Skill 或平台。
 
 用户确认或修正积木后，两份产物必须在同一轮更新；不保留与新事实冲突的旧值作为可恢复 canonical 记录。
 

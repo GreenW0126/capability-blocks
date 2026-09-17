@@ -57,6 +57,7 @@ def validate(data: dict, handoff: bool = False) -> None:
         "updated_at",
         "retention",
         "blocks_artifact",
+        "consumer_contract",
         "experiences",
         "evidence_units",
         "jd_sources",
@@ -66,8 +67,8 @@ def validate(data: dict, handoff: bool = False) -> None:
     missing = sorted(required - data.keys())
     if missing:
         fail(f"missing top-level fields: {', '.join(missing)}")
-    if data["schema_version"] != "1.2":
-        fail("schema_version must be 1.2")
+    if data["schema_version"] != "1.3":
+        fail("schema_version must be 1.3")
     if data["retention"] != "user_managed":
         fail("retention must be user_managed")
     blocks_artifact = data["blocks_artifact"]
@@ -75,6 +76,44 @@ def validate(data: dict, handoff: bool = False) -> None:
         fail("blocks_artifact must be an object")
     if not blocks_artifact.get("path") or not blocks_artifact.get("version"):
         fail("blocks_artifact requires path and version")
+
+    consumer_contract = data["consumer_contract"]
+    if not isinstance(consumer_contract, dict):
+        fail("consumer_contract must be an object")
+    expected_contract_values = {
+        "contract_version": "1.0",
+        "read_order": ["capability_blocks", "evidence_map"],
+        "required_external_inputs": [
+            "candidate_profile_or_confirmed_timeline",
+            "target_jd",
+        ],
+        "strict_metadata_validation_required": True,
+    }
+    for key, expected in expected_contract_values.items():
+        if consumer_contract.get(key) != expected:
+            fail(f"consumer_contract.{key} must be {expected!r}")
+    if consumer_contract.get("artifact_roles") != {
+        "capability_blocks": "content_strategy_and_priority",
+        "evidence_map": "factual_source_and_claim_boundaries",
+    }:
+        fail("consumer_contract.artifact_roles is invalid")
+    if consumer_contract.get("limitations") != {
+        "complete_cv_input": False,
+        "reason": "requires_external_profile_timeline_and_target_jd",
+        "excluded_personal_data": ["name", "contact_details"],
+    }:
+        fail("consumer_contract.limitations is invalid")
+    required_downstream_rules = {
+        "use_blocks_for_strategy",
+        "use_evidence_map_for_facts",
+        "trace_material_claims_to_block_and_evidence_ids",
+        "do_not_copy_blocks_as_cv_bullets",
+        "do_not_invent_or_inflate",
+        "do_not_merge_distinct_experiences",
+    }
+    downstream_rules = consumer_contract.get("downstream_rules")
+    if not isinstance(downstream_rules, list) or set(downstream_rules) != required_downstream_rules:
+        fail("consumer_contract.downstream_rules is incomplete or invalid")
 
     for key in (
         "experiences",

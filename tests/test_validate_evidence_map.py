@@ -13,12 +13,38 @@ SPEC.loader.exec_module(MODULE)
 
 def valid_map():
     return {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "run_id": "synthetic-test",
         "generated_at": "2026-09-13T00:00:00Z",
         "updated_at": "2026-09-13T00:00:00Z",
         "retention": "user_managed",
         "blocks_artifact": {"path": "capability-blocks.md", "version": "test"},
+        "consumer_contract": {
+            "contract_version": "1.0",
+            "read_order": ["capability_blocks", "evidence_map"],
+            "artifact_roles": {
+                "capability_blocks": "content_strategy_and_priority",
+                "evidence_map": "factual_source_and_claim_boundaries",
+            },
+            "required_external_inputs": [
+                "candidate_profile_or_confirmed_timeline",
+                "target_jd",
+            ],
+            "strict_metadata_validation_required": True,
+            "limitations": {
+                "complete_cv_input": False,
+                "reason": "requires_external_profile_timeline_and_target_jd",
+                "excluded_personal_data": ["name", "contact_details"],
+            },
+            "downstream_rules": [
+                "use_blocks_for_strategy",
+                "use_evidence_map_for_facts",
+                "trace_material_claims_to_block_and_evidence_ids",
+                "do_not_copy_blocks_as_cv_bullets",
+                "do_not_invent_or_inflate",
+                "do_not_merge_distinct_experiences",
+            ],
+        },
         "experiences": [
             {
                 "experience_id": "EXP-TEST",

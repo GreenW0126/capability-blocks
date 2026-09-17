@@ -1,8 +1,8 @@
-# Capability Blocks
+# Career Capability Mapper
 
 把零散、非线性或难以职业化表达的真实经历，转化为可迁移的能力积木，以及能够追溯事实来源的 evidence map。
 
-`capability-blocks` 把一段经历压缩为：真实问题 → 个人判断与行动 → 可核验产出 → 可迁移价值
+`career-capability-mapper` 把一段经历压缩为：真实问题 → 个人判断与行动 → 可核验产出 → 可迁移价值
 
 变化的关键不是换几个动词，而是同时完成三件事：
 
@@ -10,7 +10,7 @@
 2. **可迁移**：从行业任务中找出换到新环境后仍能重复解决的问题。
 3. **可追溯**：每个实质主张都能回到 `evidence-map.json` 中的原始证据。
 
-当前版本：`0.4.3`
+当前版本：`0.5.0`
 
 ## 这个项目解决什么问题
 
@@ -86,10 +86,10 @@ JD 用于识别目标市场反复出现的业务问题、职责和能力语言�
 将仓库克隆到 Codex 的 Skills 目录：
 
 ```bash
-git clone https://github.com/GreenW0126/capability-blocks.git ~/.codex/skills/capability-blocks
+git clone https://github.com/GreenW0126/career-capability-mapper.git ~/.codex/skills/career-capability-mapper
 ```
 
-重新打开 Codex 会话后，可直接描述求职方向探索、跨行能力梳理或经历迁移分析需求。Skill 保持默认的自动发现能力，也可以显式使用 `$capability-blocks`。
+重新打开 Codex 会话后，可直接描述求职方向探索、跨行能力梳理或经历迁移分析需求。Skill 保持默认的自动发现能力，也可以显式使用 `$career-capability-mapper`。
 
 ## 连接其他工具
 
@@ -141,7 +141,7 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 ## 项目结构
 
 ```text
-capability-blocks/
+career-capability-mapper/
 ├── README.md
 ├── LICENSE
 ├── .gitignore

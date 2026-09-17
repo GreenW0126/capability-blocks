@@ -11,7 +11,7 @@
 若可写文件，使用当前任务工作区内的 `.capability-blocks-session/`；目录必须加入对应忽略规则，不进入版本控制。目录内保存 `current-state.md`、`capability-blocks.md` 和 `evidence-map.json`。若不可写文件，只在当前会话上下文维护等价结构。
 
 ```markdown
-# Capability Blocks Runtime State
+# Career Capability Mapper Runtime State
 - run_id: <非身份随机值>
 - phase: target | evidence | jd | mapping | blocks | market_loop
 - target_ref:

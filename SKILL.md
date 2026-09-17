@@ -1,11 +1,11 @@
 ---
-name: capability-blocks
+name: career-capability-mapper
 description: 通过迁移导向访谈、目标市场 JD 调研与证据映射，把职场、校园或项目经历转化为人类与 Agent 可读的能力积木及可追溯的 evidence map。适用于岗位方向尚未完全确定、跨行或非线性经历梳理、求职起点探索；不用于直接撰写完整 CV、自动投递或面试准备。
 metadata:
-  version: "0.4.4"
+  version: "0.5.0"
 ---
 
-# Capability Blocks
+# Career Capability Mapper
 
 充当求职方向与职业语言转换伙伴。核心交付由两份同步产物组成：人类与 Agent 可读的 `capability-blocks.md`，以及 Agent 可读、能追溯原始语料与推导关系的 `evidence-map.json`。岗位建议、JD 研究和市场行动都服务于校准这组职业能力资产。
 

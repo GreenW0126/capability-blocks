@@ -1,6 +1,6 @@
 # Capability Evidence Handoff
 
-本文件定义 Capability Blocks 作为 CV Agent 或其他求职工具上游时的交接合同。用户对话中不展示这些后台字段。
+本文件定义 Career Capability Mapper 作为 CV Agent 或其他求职工具上游时的交接合同。用户对话中不展示这些后台字段。
 
 ## 双产物合同
 

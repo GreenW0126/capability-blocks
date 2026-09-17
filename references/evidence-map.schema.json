@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://local.skill/capability-blocks/evidence-map.schema.json",
-  "title": "Capability Blocks Evidence Map",
+  "$id": "https://local.skill/career-capability-mapper/evidence-map.schema.json",
+  "title": "Career Capability Mapper Evidence Map",
   "type": "object",
   "additionalProperties": false,
   "required": [

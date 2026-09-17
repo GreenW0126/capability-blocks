@@ -39,7 +39,11 @@
 
 `evidence-map.json` 是给 Agent 或方法研究者看的机器可读层。普通游客不需要阅读它，也能理解案例。
 
-
+| 案例 | 迁移情境 | 完整案例 |
+| --- | --- | --- |
+| 林玮 | 国内从业者进入海外市场 | [查看完整 Before & After](examples/01-china-to-global/) |
+| 周安 | 海外毕业生回国求职 | [查看完整 Before & After](examples/02-overseas-graduate-to-china/) |
+| 陈屿 | 文科／艺术从业者转入 AI | [查看完整 Before & After](examples/03-humanities-to-ai/) |
 
 ## 核心设计
 
@@ -146,6 +150,10 @@ career-capability-mapper/
 ├── LICENSE
 ├── .gitignore
 ├── SKILL.md
+├── examples/
+│   ├── 01-china-to-global/
+│   ├── 02-overseas-graduate-to-china/
+│   └── 03-humanities-to-ai/
 ├── references/
 │   ├── capability-quality.md
 │   ├── evidence-handoff.md

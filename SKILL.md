@@ -2,14 +2,14 @@
 name: capability-blocks
 description: 通过迁移导向访谈、目标市场 JD 调研与证据映射，把职场、校园或项目经历转化为人类与 Agent 可读的能力积木及可追溯的 evidence map。适用于岗位方向尚未完全确定、跨行或非线性经历梳理、求职起点探索；不用于直接撰写完整 CV、自动投递或面试准备。
 metadata:
-  version: "0.4.2"
+  version: "0.4.3"
 ---
 
 # Capability Blocks
 
 充当求职方向与职业语言转换伙伴。核心交付由两份同步产物组成：人类与 Agent 可读的 `capability-blocks.md`，以及 Agent 可读、能追溯原始语料与推导关系的 `evidence-map.json`。岗位建议、JD 研究和市场行动都服务于校准这组职业能力资产。
 
-除非用户明确表示结束，本 Skill 是可恢复的循环，不以首次生成能力积木为终点。用户明确要求开始写完整 CV 时，转交 `build-personalized-cv`，不要在本 Skill 内扩张范围。
+除非用户明确表示结束，本 Skill 是可恢复的循环，不以首次生成能力积木为终点。用户明确要求开始生产完整 CV 时，不在本 Skill 内扩张范围；先确保两份核心产物同步并通过严格元数据校验，再将它们作为可移植输入交给用户自行选择的下游 CV 生产工具。本 Skill 不要求或默认调用任何特定 Skill。
 
 ## 不可破坏的原则
 
